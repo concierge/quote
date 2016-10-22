@@ -5,29 +5,29 @@
  * Date Written: 22/07/2015
  */
 
-var wikiquote = require("./../common/wikiquote.js");
+const wikiquote = require("./wikiquote.js");
 
 //Gets a quote from the specified author and passes it into the callback
-exports.quote = function(author, callback) {
+const quote = (author, callback) => {
     if (!author || author.length == 0) {
         callback("Um.. what do you expect me to do?");
         return;
     }
 
-    wikiquote.getRandomQuote(author, function(quote) {
+    wikiquote.getRandomQuote(author, (quote) => {
         callback('"' + quote.quote + '" - ' + quote.titles);
-    }, function(message){
+    }, (message) => {
         callback("Couldn't find any quotes :'(");
     });
 }
 
 // Make the quoter do its thing
-exports.run = function(api, event) {
+exports.run = (api, event) => {
     // Strip the command and obtain the author
-    var author = event.arguments_body;
+    const author = event.arguments_body;
 
     // get the quote
-    exports.quote(author, function (result) {
+    quote(author, (result) => {
         //Send the quote to Facebook
         api.sendMessage(result, event.thread_id);
     });

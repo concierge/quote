@@ -1,6 +1,6 @@
 ﻿{
   "name": "quote",
-  "version": 3.0,
+  "version": 3.1,
   "startup": "quote.js",
   "command": "quote",
   "help": [
